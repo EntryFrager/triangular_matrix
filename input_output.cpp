@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <TXLib.h>
 
-#include "main.h"
+#include "input_output.h"
 #include "error.h"
 
 void input_score (int *matrix_score)
@@ -23,23 +23,23 @@ void input_score (int *matrix_score)
 
     if (x < y)
     {
-        *(matrix_score + y * (y - 1) / 2 - (y - 1) + x - 1) = score;
+        matrix_score[y * (y - 1) / 2 - (y - 1) + x - 1] = score;
     }
     else
     {
-        *(matrix_score + x * (x - 1) / 2 - (x - 1) + y - 1) = score;
+        matrix_score[x * (x - 1) / 2 - (x - 1) + y - 1] = score;
     }
 }
 
-void Print_trianglematrix (const int *matrix, size_t Size)
+void print_triangle_matrix (const int *matrix, size_t size_matrix)
 {
     my_assert (matrix != NULL);
 
-    for (size_t y = 0; y < Size; y++)
+    for (size_t y = 0; y < size_matrix; y++)
     {
         for (size_t x = 0; x <= y; x++)
         {
-            printf ("%d ", *(matrix + x + (y + 1) * y / 2));
+            printf ("%d ", matrix[x + (y + 1) * y / 2]);
         }
         printf("\n");
     }
@@ -49,5 +49,5 @@ void clean_buffer ()
 {
     int ch = 0;
 
-    while ((ch = getchar () != '\n') && (ch != EOF)) {}
+    while (((ch = getchar ()) != '\n') && (ch != EOF)) {}
 }

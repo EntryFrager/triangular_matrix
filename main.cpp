@@ -1,21 +1,25 @@
 #include <stdio.h>
 #include <TXLib.h>
 
-#include "main.h"
+#include "input_output.h"
 #include "error.h"
 
 int main ()
 {
     printf ("Ёто программа позвол€юща€ запоминать исходы матчей.\n");
 
-    int matrix_score[15] = {};
+    int nTeams = 0;
 
-    for (int i = 0; i < 15; i++)
+    scanf ("%d", &nTeams);
+
+    int *matrix_score = (int *) calloc (nTeams * (nTeams - 1) / 2 * sizeof(int), 4 * sizeof(int));
+
+    for (int i = 0; i < nTeams * (nTeams - 1) / 2; i++)
     {
-        input_score ((int *) matrix_score);
+        input_score (matrix_score);
     }
 
-    Print_trianglematrix ((int *) matrix_score, 5);
+    print_triangle_matrix (matrix_score, nTeams - 1);
 
     return 0;
 }
